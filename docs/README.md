@@ -6,6 +6,16 @@ Este proyecto es una base de datos relacional diseñada para gestionar las opera
 
 ---
 
+## 📊 Diagrama de Entidad-Relación (PROVISONAL, LUEGO A MEJORAR)
+
+A continuación se presenta el diagrama de entidad-relación de la base de datos:
+
+![Diagrama de Entidad-Relación](DER_SQL_project.png)
+
+RUTA: https://excalidraw.com/#json=jQ7t_vBPIAvuw-FcBTgo6,f_4u3atDlCHA8K_4J_duZw
+
+---
+
 ## 🛠️ Funcionalidades
 - **Gestión de Personal**: Registra información de los empleados, como identificadores únicos, nombres y contactos.
 - **Clientes y Pacientes**: Almacena datos de los clientes y los vincula con sus respectivas mascotas (pacientes).

@@ -42,7 +42,9 @@ CREATE TABLE animals.venta(
 );
 
 CREATE TABLE animals.citas_medicas(
-    id_citas_medicas INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+    id_citas_medicas INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_pacientes INT,
+    id_personal INT
 );
 
 CREATE TABLE animals.inventario (
@@ -54,10 +56,6 @@ CREATE TABLE animals.pacientes(
     id_pacientes INT NOT NULL AUTO_INCREMENT PRIMARY KEY
 );
 
-ALTER TABLE 
-
-animals
-
 CREATE TABLE animals.detalle_venta(
     id_detalle_venta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT,
@@ -68,7 +66,52 @@ CREATE TABLE animals.detalle_venta(
 
 CREATE TABLE animals.producto_proveedor(
     id_producto_proveedor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    id_proveedores INT,
+    id_proveedor INT,
     id_productos INT,
     fechas_entregas DATE
 );
+
+-- Relación en la tabla venta
+ALTER TABLE animals.venta
+ADD CONSTRAINT fk_venta_personal
+FOREIGN KEY (id_personal) REFERENCES animals.personal(id_personal);
+
+ALTER TABLE animals.venta
+ADD CONSTRAINT fk_venta_cliente
+FOREIGN KEY (id_cliente) REFERENCES animals.cliente(id_cliente);
+
+-- Relación en la tabla detalle_venta
+ALTER TABLE animals.detalle_venta
+ADD CONSTRAINT fk_detalle_cliente
+FOREIGN KEY (id_cliente) REFERENCES animals.cliente(id_cliente);
+
+ALTER TABLE animals.detalle_venta
+ADD CONSTRAINT fk_detalle_venta
+FOREIGN KEY (id_venta) REFERENCES animals.venta(id_venta);
+
+ALTER TABLE animals.detalle_venta
+ADD CONSTRAINT fk_detalle_producto
+FOREIGN KEY (id_producto) REFERENCES animals.productos(id_productos);
+
+-- Relación en la tabla producto_proveedor
+ALTER TABLE animals.producto_proveedor
+ADD CONSTRAINT fk_producto_proveedor_proveedor
+FOREIGN KEY (id_proveedor) REFERENCES animals.proveedor(id_proveedor);
+
+ALTER TABLE animals.producto_proveedor
+ADD CONSTRAINT fk_producto_proveedor_producto
+FOREIGN KEY (id_productos) REFERENCES animals.productos(id_productos);
+
+-- Relación en la tabla inventario
+ALTER TABLE animals.inventario
+ADD CONSTRAINT fk_inventario_producto
+FOREIGN KEY (id_producto) REFERENCES animals.productos(id_productos);
+
+-- Relaciones en la tabla citas_medicas
+ALTER TABLE animals.citas_medicas
+ADD CONSTRAINT fk_citas_pacientes
+FOREIGN KEY (id_pacientes) REFERENCES animals.pacientes(id_pacientes);
+
+ALTER TABLE animals.citas_medicas
+ADD CONSTRAINT fk_citas_personal
+FOREIGN KEY (id_personal) REFERENCES animals.personal(id_personal);
